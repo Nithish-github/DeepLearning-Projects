@@ -9,7 +9,7 @@
   </p>
 
 
-[LinkedIn](www.linkedin.com/in/innov-nithish) | [Kaggle](https://www.kaggle.com/nithunith)
+[LinkedIn]([www.linkedin.com/in/innov-nithish](https://www.linkedin.com/in/innov-nithish/)) | [Kaggle](https://www.kaggle.com/nithunith)
 
 </div>
 
