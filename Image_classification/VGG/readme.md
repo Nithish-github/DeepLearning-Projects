@@ -11,6 +11,10 @@ Simplicity: VGG Net employs a straightforward and uniform architecture, making i
 Depth: With 16 or 19 layers, VGG Net can learn complex patterns and features from images.
 Performance: Despite its simplicity, VGG Net has achieved top performance in various image classification benchmarks. 🏅
 
+# Loss Function Used 
+
+The VGG network model uses the cross-entropy loss function, which works on a logarithmic approach. After one-hot encoding the corresponding class, the log value is calculated. By default, the softmax activation function is used with the cross-entropy function. The softmax activation function gives a probability output: it takes the exponential value of each class score and divides it by the sum of all exponential values. Through this process, the loss is calculated.
+
 # Applications 📸
 
 VGG Net is widely used in various computer vision applications, including:
