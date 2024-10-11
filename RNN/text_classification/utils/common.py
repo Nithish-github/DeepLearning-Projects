@@ -3,6 +3,8 @@ import preprocessing.unicode_to_ascii
 import random
 import torch
 import string
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 
 
 all_letters = string.ascii_letters + " .,;'"
@@ -40,3 +42,25 @@ def lineToTensor(line):
     for li, letter in enumerate(line):
         tensor[li][0][letterToIndex(letter)] = 1
     return tensor
+
+
+# Save the trained model after making predictions
+def save_final_model(model, path='DeepLearning-Projects/RNN/text_classification/output/final_output.pth'):
+    torch.save(model.state_dict(), path)
+    print(f"Model saved at {path}")
+
+# plot the output 
+def plot_the_losses(all_losses,path ="DeepLearning-Projects/RNN/text_classification/output/predictions_loss_plot.png" ):
+    # Create the plot
+    plt.figure()
+    plt.plot(all_losses)
+
+    # Add labels (optional)
+    plt.xlabel('Iterations')
+    plt.ylabel('Loss')
+    plt.title('Training Loss over Time')
+
+    # Save the plot as an image (e.g., PNG, PDF, etc.)
+    plt.savefig(path)  # You can specify the file format (png, pdf, etc.)
+
+

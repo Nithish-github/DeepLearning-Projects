@@ -7,10 +7,11 @@ from model.model import RNN
 from utils.common  import *
 
 
-def trainer_loop(category_tensor, line_tensor , model , criterion):
+def trainer_loop(args, category_tensor, line_tensor , model , criterion):
     learning_rate = 0.005 # If you set this too high, it might explode. If too low, it might not learn
 
-    hidden = model.initHidden()
+
+    hidden = model.initHidden().to(args.device)
 
     model.zero_grad()
 
@@ -37,9 +38,9 @@ def timeSince(since):
 
 def train(args):
 
-    n_iters = 100000
-    print_every = 50
-    plot_every = 1000
+    n_iters = 100
+    print_every = 5
+    plot_every = 10
 
     # Keep track of losses for plotting
     current_loss = 0
@@ -58,13 +59,14 @@ def train(args):
     category_lines , all_categories = preprocessing.unicode_to_ascii.conversion(args.data)
     n_categories = len(all_categories)
 
-    model = RNN(n_letters, n_hidden, n_categories)
-
+    #model = RNN(n_letters, n_hidden, n_categories)
+    # Move model to GPU if available
+    model = RNN(n_letters, n_hidden, n_categories).to(args.device)
 
     for iter in range(1, n_iters + 1):
 
         category, line, category_tensor, line_tensor = randomTrainingExample(args)
-        output, loss = trainer_loop(category_tensor, line_tensor ,model,criterion)
+        output, loss = trainer_loop(args,category_tensor, line_tensor ,model,criterion)
         current_loss += loss
 
         if iter % print_every == 0:
@@ -76,3 +78,10 @@ def train(args):
         if iter % plot_every == 0:
             all_losses.append(current_loss / plot_every)
             current_loss = 0
+
+    #plot the loss
+    plot_the_losses(all_losses)
+    #save the model 
+    save_final_model(model)
+
+    return model
