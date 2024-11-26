@@ -11,12 +11,13 @@ def trainer_loop(args, category_tensor, line_tensor , model , criterion):
     learning_rate = 0.005 # If you set this too high, it might explode. If too low, it might not learn
 
 
-    hidden = model.initHidden().to(args.device)
+    hidden = model.initHidden().to(args.device)  # Move hidden state to the device
+    category_tensor = category_tensor.to(args.device)
 
     model.zero_grad()
 
     for i in range(line_tensor.size()[0]):
-        output, hidden = model(line_tensor[i], hidden)
+        output, hidden = model(line_tensor[i].to(args.device), hidden)
 
     loss = criterion(output, category_tensor)
     loss.backward()
@@ -38,8 +39,8 @@ def timeSince(since):
 
 def train(args):
 
-    n_iters = 100
-    print_every = 5
+    n_iters = 10000
+    print_every = 50
     plot_every = 10
 
     # Keep track of losses for plotting

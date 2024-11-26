@@ -45,12 +45,12 @@ def lineToTensor(line):
 
 
 # Save the trained model after making predictions
-def save_final_model(model, path='DeepLearning-Projects/RNN/text_classification/output/final_output.pth'):
+def save_final_model(model, path='output/final_output.pth'):
     torch.save(model.state_dict(), path)
     print(f"Model saved at {path}")
 
 # plot the output 
-def plot_the_losses(all_losses,path ="DeepLearning-Projects/RNN/text_classification/output/predictions_loss_plot.png" ):
+def plot_the_losses(all_losses,path ="output/predictions_loss_plot.png" ):
     # Create the plot
     plt.figure()
     plt.plot(all_losses)
